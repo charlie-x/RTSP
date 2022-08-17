@@ -3,3 +3,10 @@
 ################################################################################
 
 /win32/RTSPClientDll/x64/Debug
+/win32/RTSPClientLib/x64/Debug
+/win32/RTSPClientTest/.vs/RTSPClientTest
+/win32/RTSPClientTest/x64/Debug
+/win32/RTSPClientDll/x64/Release
+/win32/RTSPClientLib/x64/Release
+/win32/RTSPClientTest/x64/Release
+*.265

@@ -78,10 +78,10 @@ int main(int argc, char *argv[])
 #endif
 
 #if 0
-	char* strURL = "rtsp://127.0.0.1:8554/h264ESVideoTest";
+	char* strURL = RTSP_TEST_H264_URL;
 	fp_dump = fopen("video.264", "wb");
 #else
-	char* strURL = "rtsp://admin:antsANTS@192.168.140.103/0";
+	char* strURL = RTSP_TEST_H265_URL;
 	fp_dump = fopen("video.265", "wb");
 #endif
 
