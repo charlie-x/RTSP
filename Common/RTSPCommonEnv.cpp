@@ -15,7 +15,7 @@ int _vscprintf (const char * format, va_list pargs)
 }
 #endif
 
-int RTSPCommonEnv::nDebugPrint = 0;
+int RTSPCommonEnv::nDebugPrint = 1;
 int RTSPCommonEnv::nDebugFlag = DEBUG_FLAG_RTSP;
 
 unsigned short RTSPCommonEnv::nClientPortRangeMin = 10000;
@@ -38,7 +38,7 @@ void RTSPCommonEnv::DebugPrint(char *lpszFormat, ...)
 
 	const char *prefix = "[RTSP] ";
 
-	int prefix_len = strlen(prefix);
+	size_t prefix_len = strlen(prefix);
 	memcpy(buffer, prefix, prefix_len);
 
 	vsprintf(&buffer[prefix_len], lpszFormat, args);

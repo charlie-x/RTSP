@@ -63,14 +63,14 @@ void RTCPMemberDatabase::reapOldMembers(unsigned threshold) {
 
     HashTable::Iterator* iter
       = HashTable::Iterator::create(*fTable);
-    unsigned long timeCount;
+    size_t timeCount;
     char const* key;
-    while ((timeCount = (unsigned long)(iter->next(key))) != 0) {
+    while ((timeCount = (size_t)(iter->next(key))) != 0) {
 #ifdef DEBUG
       DPRINTF("reap: checking SSRC 0x%lx: %ld (threshold %d)\n", (unsigned long)key, timeCount, threshold);
 #endif
       if (timeCount < (unsigned long)threshold) { // this SSRC is old
-        unsigned long ssrc = (unsigned long)key;
+		size_t ssrc = (size_t)key;
         oldSSRC = (unsigned)ssrc;
         foundOldMember = true;
       }
@@ -544,7 +544,7 @@ void RTCPInstance::sendBuiltPacket()
 ////////// SDESItem //////////
 
 SDESItem::SDESItem(unsigned char tag, unsigned char const* value) {
-	unsigned length = strlen((char const*)value);
+	size_t length = strlen((char const*)value);
 	if (length > 511) length = 511;
 
 	fData[0] = tag;

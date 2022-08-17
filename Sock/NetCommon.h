@@ -7,8 +7,20 @@
 #include <ws2tcpip.h>
 
 #define closeSocket	closesocket
+
+#ifdef EWOULDBLOCK
+#undef EWOULDBLOCK
+#endif
 #define EWOULDBLOCK	WSAEWOULDBLOCK
+
+#ifdef EINPROGRESS
+#undef EINPROGRESS
+#endif
 #define EINPROGRESS WSAEWOULDBLOCK
+
+#ifdef EINTR
+#undef EINTR
+#endif
 #define EINTR		WSAEINTR
 
 #else

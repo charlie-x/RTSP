@@ -508,7 +508,7 @@ char* createSDPString(char *mediaType, unsigned char payloadType, char *codec, u
 		"a=rtpmap:%d %s/%d\r\n"
 		"a=control:%s\r\n";
 
-	unsigned sdpFmtSize = strlen(sdpFmt)
+	size_t sdpFmtSize = strlen(sdpFmt)
 		+ strlen(mediaType) + 5 + 3
 		+ strlen("a=rtpmap:") + 3 + strlen(codec) + 4
 		+ strlen("a=control:") + strlen(trackId)

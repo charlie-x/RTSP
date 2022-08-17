@@ -115,7 +115,6 @@ again:
 			}
 		}
 	}	
-exit:
 #ifdef RTSPCLIENT_DLL
 	rtspclient_close_url(rtspClient);
 #else

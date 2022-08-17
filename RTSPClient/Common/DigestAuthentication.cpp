@@ -95,15 +95,15 @@ char const* Authenticator::computeDigestResponse(char const* cmd,
     strncpy(ha1Buf, password(), 32);
     ha1Buf[32] = '\0'; // just in case
   } else {
-    unsigned const ha1DataLen = strlen(username()) + 1
-      + strlen(realm()) + 1 + strlen(password());
+    unsigned const ha1DataLen = (unsigned int)strlen(username()) + 1
+      + (unsigned int)strlen(realm()) + 1 + (unsigned int)strlen(password());
     unsigned char* ha1Data = new unsigned char[ha1DataLen+1];
     sprintf((char*)ha1Data, "%s:%s:%s", username(), realm(), password());
     our_MD5Data(ha1Data, ha1DataLen, ha1Buf);
     delete[] ha1Data;
   }
 
-  unsigned const ha2DataLen = strlen(cmd) + 1 + strlen(url);
+  unsigned const ha2DataLen = (unsigned int)strlen(cmd) + 1 + (unsigned int)strlen(url);
   unsigned char* ha2Data = new unsigned char[ha2DataLen+1];
   sprintf((char*)ha2Data, "%s:%s", cmd, url);
   char ha2Buf[33];
@@ -111,7 +111,7 @@ char const* Authenticator::computeDigestResponse(char const* cmd,
   delete[] ha2Data;
 
   unsigned const digestDataLen
-    = 32 + 1 + strlen(nonce()) + 1 + 32;
+    = 32 + 1 + (unsigned int)strlen(nonce()) + 1 + 32;
   unsigned char* digestData = new unsigned char[digestDataLen+1];
   sprintf((char*)digestData, "%s:%s:%s",
           ha1Buf, nonce(), ha2Buf);

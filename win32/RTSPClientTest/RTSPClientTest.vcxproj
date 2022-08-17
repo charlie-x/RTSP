@@ -85,7 +85,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\OS_Common;..\..\Sock;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTP;..\..\RTSPClient\Common;..\..\RTSPClient\RTCP;..\..\Common;..\..\Util;..\RTSPClientDll;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -100,7 +100,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\OS_Common;..\..\Sock;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTP;..\..\RTSPClient\Common;..\..\RTSPClient\RTCP;..\..\Common;..\..\Util;..\RTSPClientDll;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -117,7 +117,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\OS_Common;..\..\Sock;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTP;..\..\RTSPClient\Common;..\..\RTSPClient\RTCP;..\..\Common;..\..\Util;..\RTSPClientDll;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -136,7 +136,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RTSP_TEST_H264_URL=$(RTSP_TEST_H264_URL);RTSP_TEST_H265_URL=$(RTSP_TEST_H265_URL);WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\OS_Common;..\..\Sock;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTP;..\..\RTSPClient\Common;..\..\RTSPClient\RTCP;..\..\Common;..\..\Util;..\RTSPClientDll;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

@@ -25,7 +25,7 @@ char* strDupSize(char const* str)
 
 int CheckUdpPort(unsigned short port)
 {
-	int newSocket = socket(AF_INET, SOCK_DGRAM, 0);
+	SOCKET newSocket = socket(AF_INET, SOCK_DGRAM, 0);
 	if (newSocket < 0) {
 		DPRINTF("unable to create datagram socket: \n");
 		return -1;

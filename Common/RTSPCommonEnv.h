@@ -17,10 +17,13 @@ extern int _vscprintf (const char * format, va_list pargs);
 #define DPRINTF0	RTSPCommonEnv::DebugPrint
 #endif
 
-#define DEBUG_FLAG_RTSP			(0x01)
-#define DEBUG_FLAG_RTP			(0x02)
-#define DEBUG_FLAG_RTP_PAYLOAD	(0x04)
-#define DEBUG_FLAG_ALL			(0xFF)
+#ifndef DEBUG_FLAG_RTSP
+#define DEBUG_FLAG_RTSP			(0x00000001)
+#define DEBUG_FLAG_RTP			(0x00000010)
+#define DEBUG_FLAG_RTP_PAYLOAD	(0x00000100)
+#endif
+
+#define DEBUG_FLAG_ALL			(0x000000FF)
 
 #define DELETE_OBJECT(obj) if (obj) { delete obj; obj = NULL; }
 #define DELETE_ARRAY(arr) if (arr) { delete[] arr; arr = NULL; }

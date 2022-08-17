@@ -135,7 +135,7 @@ int RTSPClient::connectToServer(const char *ip_addr, unsigned short port, int ti
 
 	if ((ret=connect(sock, (struct sockaddr *)&svr_addr, sizeof(svr_addr))) != 0) {
 		err = WSAGetLastError();
-		if (err != EINPROGRESS && err != EWOULDBLOCK) {
+		if (err != EINPROGRESS && err != EWOULDBLOCK ) {
 			DPRINTF0("connect() failed\n");
 			goto connect_fail;
 		}
@@ -169,7 +169,7 @@ int RTSPClient::sendRequest(char *str, char *tag)
 	if (RTSPCommonEnv::nDebugFlag&DEBUG_FLAG_RTSP)
 		DPRINTF("Sending Request:\n%s\n", str);
 
-	int ret = fRtspSock.writeSocket(str, strlen(str));
+	int ret = fRtspSock.writeSocket(str, (unsigned int)strlen(str));
 	if (ret <= 0) {
 		if (tag == NULL) tag = "";
 		DPRINTF("send() failed: %s, err: %d\n", tag, WSAGetLastError());
@@ -467,7 +467,7 @@ bool RTSPClient::parseRTSPMessage()
 
 				if (responseBuffer < p) {
 					// do parse RTSP Message
-					int sz = p+3-responseBuffer;
+					size_t  sz = p+3-responseBuffer;
 					char *msg = new char[sz+1];
 					memcpy(msg, responseBuffer, sz);
 					*(msg+sz) = '\0';
@@ -503,7 +503,7 @@ void RTSPClient::handleCmd_notSupported(char const* cseq)
 	char tmpBuf[512];
 	snprintf((char*)tmpBuf, sizeof tmpBuf,
 		"RTSP/1.0 405 Method Not Allowed\r\nCSeq: %s\r\n\r\n", cseq);
-	fRtspSock.writeSocket(tmpBuf, strlen(tmpBuf));
+	fRtspSock.writeSocket(tmpBuf, (unsigned int)strlen(tmpBuf));
 }
 
 bool RTSPClient::lookupStreamChannelId(unsigned char channel)
@@ -610,7 +610,7 @@ char* RTSPClient::sendOptionsCmd(const char *url, char *username, char *password
 			"%s"
 			"\r\n";
 
-		unsigned cmdSize = strlen(cmdFmt)
+		size_t cmdSize = strlen(cmdFmt)
 			+ strlen(url)
 			+ 20 /* max int len */
 			+ strlen(authenticatorStr)
@@ -822,11 +822,11 @@ char* RTSPClient::describeURL(const char *url, Authenticator* authenticator, boo
 				// We need to read more data.  First, make sure we have enough
 				// space for it:
 				unsigned numExtraBytesNeeded = contentLength - numBodyBytes;
-				unsigned remainingBufferSize
+				size_t remainingBufferSize
 					= fResponseBufferSize - (bytesRead + (firstLine - fResponseBuffer));
 				if (numExtraBytesNeeded > remainingBufferSize) {
 					char tmpBuf[200];
-					sprintf(tmpBuf, "Read buffer size (%d) is too small for \"Content-length:\" %d (need a buffer size of >= %d bytes\n",
+					sprintf(tmpBuf, "Read buffer size (%d) is too small for \"Content-length:\" %d (need a buffer size of >= %zd bytes\n",
 						fResponseBufferSize, contentLength,
 						fResponseBufferSize + numExtraBytesNeeded - remainingBufferSize);
 					DPRINTF0(tmpBuf);
@@ -941,8 +941,8 @@ void RTSPClient::constructSubsessionURL(MediaSubsession const& subsession,
 	if (isAbsoluteURL(suffix)) {
 		prefix = separator = "";
 	} else {
-		unsigned prefixLen = strlen(prefix);
-		unsigned suffixLen = strlen(suffix);
+		size_t prefixLen = strlen(prefix);
+		size_t suffixLen = strlen(suffix);
 		separator = ((prefixLen > 0 && prefix[prefixLen-1] == '/') || (suffixLen > 0 && suffix[0] == '/')) ? "" : "/";
 	}
 }
@@ -1062,7 +1062,7 @@ bool RTSPClient::setupMediaSubsession(MediaSubsession& subsession, bool streamOu
 			transportFmt = "Transport: RAW/RAW/UDP%s%s%s=%d-%d\r\n";
 		} else {
 			char const* setupFmt = "SETUP %s%s%s RTSP/1.0\r\n";
-			unsigned setupSize = strlen(setupFmt)
+			size_t setupSize = strlen(setupFmt)
 				+ strlen(prefix) + strlen (separator) + strlen(suffix);
 			setupStr = new char[setupSize];
 			sprintf(setupStr, setupFmt, prefix, separator, suffix);
@@ -1097,7 +1097,7 @@ bool RTSPClient::setupMediaSubsession(MediaSubsession& subsession, bool streamOu
 				rtcpNumber = rtpNumber + 1;
 			}
 
-			unsigned transportSize = strlen(transportFmt)
+			size_t  transportSize = strlen(transportFmt)
 				+ strlen(transportTypeStr) + strlen(modeStr) + strlen(portTypeStr) + 2*5 /* max port len */;
 			transportStr = new char[transportSize];
 			sprintf(transportStr, transportFmt,
@@ -1114,7 +1114,7 @@ bool RTSPClient::setupMediaSubsession(MediaSubsession& subsession, bool streamOu
 			"%s"
 			"\r\n";
 
-		unsigned cmdSize = strlen(cmdFmt)
+		size_t cmdSize = strlen(cmdFmt)
 			+ strlen(setupStr)
 			+ 20 /* max int len */
 			+ strlen(transportStr)
@@ -1340,7 +1340,7 @@ bool RTSPClient::playMediaSession(MediaSession& session, bool response,
 			"\r\n";
 
 		char const* sessURL = sessionURL(session);
-		unsigned cmdSize = strlen(cmdFmt)
+		size_t  cmdSize = strlen(cmdFmt)
 			+ strlen(sessURL)
 			+ 20 /* max int len */
 			+ strlen(fLastSessionId)
@@ -1432,7 +1432,7 @@ bool RTSPClient::pauseMediaSession(MediaSession& session)
 			"%s"
 			"\r\n";
 
-		unsigned cmdSize = strlen(cmdFmt)
+		size_t cmdSize = strlen(cmdFmt)
 			+ strlen(sessURL)
 			+ 20 /* max int len */
 			+ strlen(fLastSessionId)
@@ -1734,7 +1734,7 @@ char* RTSPClient::createAuthenticatorString(Authenticator const* authenticator, 
 					"Authorization: Digest username=\"%s\", realm=\"%s\", "
 					"nonce=\"%s\", uri=\"%s\", response=\"%s\"\r\n";
 				char const* response = authenticator->computeDigestResponse(cmd, url);
-				unsigned authBufSize = strlen(authFmt)
+				size_t authBufSize = strlen(authFmt)
 					+ strlen(authenticator->username()) + strlen(authenticator->realm())
 					+ strlen(authenticator->nonce()) + strlen(url) + strlen(response);
 				authenticatorStr = new char[authBufSize];
@@ -1750,7 +1750,7 @@ char* RTSPClient::createAuthenticatorString(Authenticator const* authenticator, 
 				sprintf(usernamePassword, "%s:%s", authenticator->username(), authenticator->password());
 
 				char* response = base64Encode(usernamePassword, usernamePasswordLength);
-				unsigned const authBufSize = strlen(authFmt) + strlen(response) + 1;
+				size_t authBufSize = strlen(authFmt) + strlen(response) + 1;
 				authenticatorStr = new char[authBufSize];
 				sprintf(authenticatorStr, authFmt, response);
 				delete[] response; delete[] usernamePassword;
@@ -1854,12 +1854,12 @@ bool RTSPClient::setMediaSessionParameter(MediaSession& session,
 			"Session: %s\r\n"
 			"%s"
 			"%s"
-			"Content-length: %d\r\n\r\n"
+			"Content-length: %zd\r\n\r\n"
 			"%s: %s\r\n\r\n";
 
-		unsigned parameterNameLen = strlen(parameterName);
-		unsigned parameterValueLen = strlen(parameterValue);
-		unsigned cmdSize = strlen(cmdFmt)
+		size_t parameterNameLen = strlen(parameterName);
+		size_t parameterValueLen = strlen(parameterValue);
+		size_t cmdSize = strlen(cmdFmt)
 			+ strlen(fBaseURL)
 			+ 20 /* max int len */
 			+ strlen(fLastSessionId)
@@ -1922,11 +1922,11 @@ bool RTSPClient::getMediaSessionParameter(MediaSession& /*session*/,
 				"%s"
 				"%s"
 				"Content-type: text/parameters\r\n"
-				"Content-length: %d\r\n\r\n"
+				"Content-length: %zd\r\n\r\n"
 				"%s\r\n";
 
-			unsigned parameterNameLen = strlen(parameterName);
-			unsigned cmdSize = strlen(cmdFmt)
+			size_t parameterNameLen = strlen(parameterName);
+			size_t cmdSize = strlen(cmdFmt)
 				+ strlen(fBaseURL)
 				+ 20 /* max int len */
 				+ strlen(fLastSessionId)
@@ -2095,7 +2095,7 @@ bool RTSPClient::teardownMediaSession(MediaSession &session)
 			"%s"
 			"\r\n";
 
-		unsigned cmdSize = strlen(cmdFmt)
+		size_t cmdSize = strlen(cmdFmt)
 			+ strlen(sessURL)
 			+ 20 /* max int len */
 			+ strlen(fLastSessionId)

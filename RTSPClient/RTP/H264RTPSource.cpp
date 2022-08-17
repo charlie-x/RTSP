@@ -213,7 +213,7 @@ unsigned char* parseH264ConfigStr(char const* configStr, unsigned int& configSiz
 		}
 	}
 
-	int sz = 5 * strlen(dup);
+	size_t sz = 5 * strlen(dup);
 	if (sz == 0) {
 		delete[] dup;
 		return NULL;

@@ -14,7 +14,7 @@
 #define DEBUG_FLAG_RTP			(0x00000010)
 #define DEBUG_FLAG_RTP_PAYLOAD	(0x00000100)
 
-typedef enum DLL_RTP_FRAME_TYPE { DLL_FRAME_TYPE_VIDEO, DLL_FRAME_TYPE_AUDIO, DLL_FRAME_TYPE_ETC };
+typedef enum DLL_RTP_FRAME_TYPE { DLL_FRAME_TYPE_VIDEO, DLL_FRAME_TYPE_AUDIO, DLL_FRAME_TYPE_ETC } _DLL_RTP_FRAME_TYPE;
 typedef void DllFrameHandlerFunc(void *arg, DLL_RTP_FRAME_TYPE frame_type, __int64 timestamp, unsigned char *buf, int len);
 typedef void DllCloseHandlerFunc(void* arg, int err, int result);
 
