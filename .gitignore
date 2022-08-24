@@ -10,3 +10,4 @@
 /win32/RTSPClientLib/x64/Release
 /win32/RTSPClientTest/x64/Release
 *.265
+/win32/RTSPClientLib/.vs/RTSPClientLib
