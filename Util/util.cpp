@@ -39,7 +39,7 @@ int CheckUdpPort(unsigned short port)
 
 	if (bind(newSocket, (struct sockaddr*)&c_addr, sizeof c_addr) != 0) {
 		char tmpBuffer[100];
-		sprintf(tmpBuffer, "[%s] bind() error (port number: %d): ", __FUNCTION__, port);
+		sprintf_s(tmpBuffer, sizeof(tmpBuffer), "[%s] bind() error (port number: %d): ", __FUNCTION__, port);
 		DPRINTF0(tmpBuffer);
 		closeSocket(newSocket);
 		return -1;

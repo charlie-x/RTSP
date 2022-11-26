@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{4C9E5E1A-FD1F-428F-B6E1-7711AFFD2A12}</ProjectGuid>
     <RootNamespace>RTSPClientLib</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -64,7 +64,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
+    <_ProjectFileVersion>17.0.33015.44</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
@@ -86,7 +86,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Common;..\..\Sock;..\..\Util;..\..\OS_Common;..\..\RTSPClient\Common;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTCP;..\..\RTSPClient\RTP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;RTSP_CLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -102,10 +102,10 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Common;..\..\Sock;..\..\Util;..\..\OS_Common;..\..\RTSPClient\Common;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTCP;..\..\RTSPClient\RTP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;RTSP_CLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -116,8 +116,8 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\..\Common;..\..\Sock;..\..\Util;..\..\OS_Common;..\..\RTSPClient\Common;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTCP;..\..\RTSPClient\RTP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;RTSP_CLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
@@ -132,7 +132,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\..\Common;..\..\Sock;..\..\Util;..\..\OS_Common;..\..\RTSPClient\Common;..\..\RTSPClient\RTSP;..\..\RTSPClient\RTCP;..\..\RTSPClient\RTP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;RTSP_CLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
@@ -141,17 +141,19 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\OS_Common\MySemaphore.cpp" />
-    <ClCompile Include="..\..\RTSPClient\Common\BitVector.cpp" />
-    <ClCompile Include="..\..\RTSPClient\Common\DigestAuthentication.cpp" />
     <ClCompile Include="..\..\Common\RTSPCommon.cpp" />
     <ClCompile Include="..\..\Common\RTSPCommonEnv.cpp" />
+    <ClCompile Include="..\..\OS_Common\Event.cpp" />
+    <ClCompile Include="..\..\OS_Common\Mutex.cpp" />
+    <ClCompile Include="..\..\OS_Common\Thread.cpp" />
+    <ClCompile Include="..\..\RTSPClient\Common\BitVector.cpp" />
+    <ClCompile Include="..\..\RTSPClient\Common\DigestAuthentication.cpp" />
     <ClCompile Include="..\..\RTSPClient\RTCP\BasicHashTable.cpp" />
     <ClCompile Include="..\..\RTSPClient\RTCP\HashTable.cpp" />
     <ClCompile Include="..\..\RTSPClient\RTCP\OutPacketBuffer.cpp" />
     <ClCompile Include="..\..\RTSPClient\RTCP\RTCP.cpp" />
-    <ClCompile Include="..\..\RTSPClient\RTCP\rtcp_from_spec.c" />
     <ClCompile Include="..\..\RTSPClient\RTCP\RTCPInstance.cpp" />
+    <ClCompile Include="..\..\RTSPClient\RTCP\rtcp_from_spec.c" />
     <ClCompile Include="..\..\RTSPClient\RTP\AC3RTPSource.cpp" />
     <ClCompile Include="..\..\RTSPClient\RTP\H264RTPSource.cpp" />
     <ClCompile Include="..\..\RTSPClient\RTP\H265RTPSource.cpp" />
@@ -169,44 +171,35 @@
     <ClCompile Include="..\..\Util\our_md5.c" />
     <ClCompile Include="..\..\Util\our_md5hl.c" />
     <ClCompile Include="..\..\Util\util.cpp" />
-    <ClCompile Include="..\..\OS_Common\Event.cpp" />
-    <ClCompile Include="..\..\OS_Common\Mutex.cpp" />
-    <ClCompile Include="..\..\OS_Common\Thread.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\RTSPClient\Common\DigestAuthentication.hh" />
-    <None Include="..\..\RTSPClient\RTCP\BasicHashTable.hh" />
-    <None Include="..\..\RTSPClient\RTCP\HashTable.hh" />
-    <None Include="..\..\Util\Base64.hh" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\RTSPCommon.h" />
     <ClInclude Include="..\..\Common\RTSPCommonEnv.h" />
-    <ClInclude Include="..\..\OS_Common\MySemaphore.h" />
-    <ClInclude Include="..\..\RTSPClient\Common\BitVector.hh" />
+    <ClInclude Include="..\..\OS_Common\Event.h" />
+    <ClInclude Include="..\..\OS_Common\Mutex.h" />
+    <ClInclude Include="..\..\OS_Common\NetCommon.h" />
+    <ClInclude Include="..\..\OS_Common\Thread.h" />
+    <ClInclude Include="..\..\RTSPClient\Common\DigestAuthentication.hh" />
+    <ClInclude Include="..\..\RTSPClient\RTCP\BasicHashTable.hh" />
+    <ClInclude Include="..\..\RTSPClient\RTCP\HashTable.hh" />
     <ClInclude Include="..\..\RTSPClient\RTCP\OutPacketBuffer.h" />
     <ClInclude Include="..\..\RTSPClient\RTCP\RTCP.h" />
-    <ClInclude Include="..\..\RTSPClient\RTCP\rtcp_from_spec.h" />
     <ClInclude Include="..\..\RTSPClient\RTCP\RTCPInstance.h" />
+    <ClInclude Include="..\..\RTSPClient\RTCP\rtcp_from_spec.h" />
     <ClInclude Include="..\..\RTSPClient\RTP\AC3RTPSource.h" />
     <ClInclude Include="..\..\RTSPClient\RTP\H264RTPSource.h" />
-    <ClInclude Include="..\..\RTSPClient\RTP\H265RTPSource.h" />
     <ClInclude Include="..\..\RTSPClient\RTP\JPEGRTPSource.h" />
     <ClInclude Include="..\..\RTSPClient\RTP\MPEG4ESRTPSource.h" />
-    <ClInclude Include="..\..\RTSPClient\RTP\MPEG4GenericRTPSource.h" />
     <ClInclude Include="..\..\RTSPClient\RTP\RTPPacketBuffer.h" />
     <ClInclude Include="..\..\RTSPClient\RTP\RTPSource.h" />
     <ClInclude Include="..\..\RTSPClient\RTSP\MediaSession.h" />
     <ClInclude Include="..\..\RTSPClient\RTSP\RTSPClient.h" />
     <ClInclude Include="..\..\Sock\MySock.h" />
-    <ClInclude Include="..\..\Sock\NetCommon.h" />
     <ClInclude Include="..\..\Sock\SockCommon.h" />
     <ClInclude Include="..\..\Sock\TaskScheduler.h" />
+    <ClInclude Include="..\..\Util\Base64.hh" />
     <ClInclude Include="..\..\Util\our_md5.h" />
     <ClInclude Include="..\..\Util\util.h" />
-    <ClInclude Include="..\..\OS_Common\Event.h" />
-    <ClInclude Include="..\..\OS_Common\Mutex.h" />
-    <ClInclude Include="..\..\OS_Common\Thread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
